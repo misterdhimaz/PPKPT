@@ -58,8 +58,8 @@
 
             <div class="flex justify-between h-20 items-center">
                 <div class="flex items-center gap-3">
-<img src="{{ Vite::asset('resources/images/satgas.png') }}"
-     alt="Logo Unsri"
+<img src="{{ asset('images/satgas.png') }}"
+     alt="Logo Satgas"
      class="h-14 w-auto">
 
 
