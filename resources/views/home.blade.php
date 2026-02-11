@@ -4,10 +4,10 @@
 
 <section class="relative h-[800px] flex items-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-        <img src="https://unsri.ac.id/frontend/images/slider/home1/unsri_landmark_idl.jpg"
-             alt="Rektorat UNSRI"
-             class="w-full h-full object-cover object-center transform scale-105"
-             data-aos="zoom-out" data-aos-duration="2000">
+        <img src="{{ asset('images/landmark.jpg') }}"
+     alt="Rektorat UNSRI"
+     class="w-full h-full object-cover object-center transform scale-105"
+     data-aos="zoom-out" data-aos-duration="2000">
         <div class="absolute inset-0 bg-gradient-to-r from-unsri-green/95 via-unsri-green/70 to-transparent mix-blend-multiply"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
     </div>
