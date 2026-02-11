@@ -246,7 +246,7 @@
 
              <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group border-2 border-unsri-yellow" data-aos="fade-up" data-aos-delay="400">
                 <div class="relative h-64 flex items-center justify-center bg-yellow-50">
-                    <img src="images/satgas.png" class="w-32 h-32 opacity-80 group-hover:rotate-12 transition-transform duration-500">
+                    <img src="{{ asset('images/satgas.png') }}" class="w-32 h-32 opacity-80 group-hover:rotate-12 transition-transform duration-500">
                 </div>
                 <div class="p-6 bg-unsri-green text-white">
                     <h3 class="font-bold text-lg mb-2">Mekanisme Resmi</h3>

@@ -105,7 +105,7 @@
 
                 <div class="space-y-6">
                     <div class="flex items-center gap-4">
-                        <img src="images/satgas.png" alt="Logo Unsri" class="h-16 w-auto ">
+                       <img src="{{ asset('images/satgas.png') }}" alt="Logo Unsri" class="h-16 w-auto">
                         <div>
                             <h2 class="text-2xl font-bold leading-none tracking-tight">
                                 SATGAS PPKPT <span class="text-unsri-yellow">UNSRI</span>
