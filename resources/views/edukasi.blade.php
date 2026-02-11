@@ -318,9 +318,9 @@
         <p class="text-unsri-yellow/90 text-lg mb-10 max-w-2xl mx-auto font-medium" data-aos="fade-up" data-aos-delay="100">
             Pengetahuan ini adalah senjata Anda. Jika Anda atau teman Anda mengalami salah satu bentuk kekerasan di atas, jangan ragu untuk melapor.
         </p>
-        <a href="{{ route('lapor.create') }}" class="inline-block bg-unsri-yellow text-unsri-green font-extrabold px-12 py-4 rounded-full hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(250,204,21,0.5)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transform hover:-translate-y-1" data-aos="flip-up" data-aos-delay="200">
-            <i class="fas fa-shield-alt mr-2"></i> Akses Layanan Pelaporan
-        </a>
+<a href="#" class="inline-block bg-unsri-yellow text-unsri-green font-extrabold px-12 py-4 rounded-full hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(250,204,21,0.5)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transform hover:-translate-y-1" data-aos="flip-up" data-aos-delay="200">
+    <i class="fas fa-shield-alt mr-2"></i> Akses Layanan Pelaporan
+</a>
     </div>
 </section>
 

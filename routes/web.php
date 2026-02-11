@@ -14,5 +14,7 @@ Route::post('/lapor', [LaporanController::class, 'store'])->name('laporan.store'
 
 // Halaman Edukasi (Static)
 Route::get('/edukasi', function () {
-    return view('edukasi'); // Nanti perlu dibuat file edukasi.blade.php
+    return view('edukasi');
 });
+
+Route::get('/lapor', [LaporanController::class, 'create'])->name('lapor.create');
