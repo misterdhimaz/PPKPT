@@ -1,101 +1,127 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="relative bg-unsri-green h-64 overflow-hidden">
-    <div class="absolute inset-0 opacity-20">
-        <img src="https://fkip.unsri.ac.id/wp-content/uploads/2016/08/rektorat-unsri-indralaya.jpg" class="w-full h-full object-cover">
-    </div>
-    <div class="relative max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
-        <h2 class="text-3xl font-bold text-white uppercase tracking-widest mb-8">Statistik Penanganan 2026</h2>
 
-        <div class="grid grid-cols-3 gap-4 md:gap-12 w-full max-w-3xl">
-            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                <div class="text-4xl font-extrabold text-white">{{ $stats['masuk'] }}</div>
-                <div class="text-[10px] md:text-xs font-bold text-unsri-yellow uppercase mt-1">Laporan Masuk</div>
+<div class="relative w-full h-[500px] overflow-hidden">
+    <div class="absolute inset-0">
+        <img src="https://unsri.ac.id/frontend/images/slider/home1/unsri_landmark_idl.jpg"
+             class="w-full h-full object-cover brightness-50"
+             alt="Rektorat UNSRI">
+    </div>
+
+    <div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-4">
+        <h2 class="text-white font-bold text-lg md:text-xl tracking-widest mb-10 uppercase">
+            STATISTIK PENANGANAN 2026
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl">
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 flex flex-col items-center justify-center text-white hover:bg-white/20 transition duration-300">
+                <span class="text-5xl font-extrabold mb-2">{{ $stats['masuk'] }}</span>
+                <span class="text-xs font-bold uppercase tracking-wider opacity-80">Laporan Masuk</span>
             </div>
-            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                <div class="text-4xl font-extrabold text-white">{{ $stats['proses'] }}</div>
-                <div class="text-[10px] md:text-xs font-bold text-unsri-yellow uppercase mt-1">Sedang Diproses</div>
+
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 flex flex-col items-center justify-center text-white hover:bg-white/20 transition duration-300">
+                <span class="text-5xl font-extrabold mb-2">{{ $stats['proses'] }}</span>
+                <span class="text-xs font-bold uppercase tracking-wider opacity-80">Sedang Diproses</span>
             </div>
-            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                <div class="text-4xl font-extrabold text-white">{{ $stats['selesai'] }}</div>
-                <div class="text-[10px] md:text-xs font-bold text-unsri-yellow uppercase mt-1">Selesai Ditangani</div>
+
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 flex flex-col items-center justify-center text-white hover:bg-white/20 transition duration-300">
+                <span class="text-5xl font-extrabold mb-2">{{ $stats['selesai'] }}</span>
+                <span class="text-xs font-bold uppercase tracking-wider opacity-80">Selesai Ditangani</span>
             </div>
         </div>
     </div>
 </div>
 
-<div class="bg-gray-50 min-h-screen py-12">
-    <div class="max-w-7xl mx-auto px-4">
+<div class="bg-white py-16 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4">
 
-        <div class="flex flex-col md:flex-row justify-between items-end mb-6 gap-4">
-            <div>
-                <h3 class="text-2xl font-bold text-unsri-green uppercase">Daftar Proses Penanganan</h3>
-                <div class="h-1 w-20 bg-unsri-yellow mt-2"></div>
-            </div>
+        <h3 class="text-2xl md:text-3xl font-bold text-[#556B2F] uppercase mb-8">
+            DAFTAR PROSES PENANGANAN
+        </h3>
 
-            <div class="relative w-full md:w-64">
-                <input type="text" placeholder="Cari Nomor Kasus..." class="w-full pl-4 pr-10 py-2 rounded-lg border border-unsri-yellow text-sm focus:outline-none focus:ring-2 focus:ring-unsri-yellow">
-                <button class="absolute right-3 top-1/2 -translate-y-1/2 text-unsri-yellow">
+        <div class="flex flex-col md:flex-row justify-end items-center mb-6 gap-4">
+            <div class="relative w-full md:w-80">
+                <input type="text" placeholder="Cari Kasus"
+                       class="w-full px-4 py-2 rounded-full border border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm placeholder-gray-400">
+                <button class="absolute right-3 top-1/2 -translate-y-1/2 text-yellow-500 text-lg">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-unsri-green">
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left">
-                    <thead class="bg-unsri-light-green text-unsri-green uppercase text-xs font-extrabold">
-                        <tr>
-                            <th class="px-6 py-4">No</th>
-                            <th class="px-6 py-4">Nomor Perkara</th>
-                            <th class="px-6 py-4">Tanggal Masuk</th>
-                            <th class="px-6 py-4">Status Penanganan</th>
-                            <th class="px-6 py-4">Tanggal Update</th>
-                            <th class="px-6 py-4 text-center">Detail Kasus</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100">
-                        @forelse($laporans as $index => $laporan)
-                        <tr class="hover:bg-gray-50 transition duration-150">
-                            <td class="px-6 py-4 font-medium text-gray-500">{{ $laporans->firstItem() + $index }}</td>
-                            <td class="px-6 py-4 font-bold text-gray-800">{{ $laporan->ticket_id }}</td>
-                            <td class="px-6 py-4 text-gray-600">{{ $laporan->created_at->format('d F Y') }}</td>
-                            <td class="px-6 py-4">
-                                @php
-                                    $statusClass = match($laporan->status) {
-                                        'Selesai' => 'bg-green-100 text-green-800 border-green-200',
-                                        'Verifikasi' => 'bg-gray-100 text-gray-800 border-gray-200',
-                                        default => 'bg-yellow-100 text-yellow-800 border-yellow-200',
-                                    };
-                                @endphp
-                                <span class="px-3 py-1 rounded-full text-xs font-bold border {{ $statusClass }}">
-                                    {{ $laporan->status }}
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 text-gray-600">{{ $laporan->updated_at->format('d F Y') }}</td>
-                            <td class="px-6 py-4 text-center">
-                                <a href="#" class="inline-block bg-unsri-yellow text-unsri-green font-bold px-6 py-1.5 rounded-full text-xs hover:bg-yellow-400 shadow-sm transition">
-                                    Detail
-                                </a>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="px-6 py-12 text-center text-gray-400">
-                                <i class="fas fa-folder-open text-4xl mb-3 block opacity-30"></i>
-                                Belum ada data penanganan kasus saat ini.
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="px-6 py-4 bg-gray-50 border-t">
-                {{ $laporans->links() }}
+        <div class="flex justify-center mb-8">
+            <div class="flex items-center gap-8 text-xl font-bold text-gray-400">
+                <a href="#" class="text-[#556B2F] border-b-4 border-[#556B2F] pb-1">Proses</a>
+                <div class="h-6 w-px bg-gray-300"></div>
+                <a href="#" class="hover:text-[#556B2F] transition-colors pb-1">Selesai</a>
             </div>
         </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left border-separate border-spacing-y-3">
+                <thead>
+                    <tr class="bg-[#4FD1C5] text-[#0B1E33] text-xs uppercase font-extrabold shadow-sm">
+                        <th class="py-4 px-6 rounded-l-lg">No</th>
+                        <th class="py-4 px-6">Nomor Perkara</th>
+                        <th class="py-4 px-6">Tanggal Masuk</th>
+                        <th class="py-4 px-6">Status Penanganan</th>
+                        <th class="py-4 px-6">Tanggal Update</th>
+                        <th class="py-4 px-6 text-center rounded-r-lg">Detail Kasus</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    @foreach($laporans as $index => $laporan)
+                    <tr class="bg-white hover:bg-gray-50 transition-shadow shadow-sm hover:shadow-md">
+                        <td class="py-4 px-6 font-bold text-center border-b border-gray-100">
+                            {{ $index + 1 }}
+                        </td>
+
+                        <td class="py-4 px-6 font-medium border-b border-gray-100">
+                            {{ $laporan->ticket_id }}
+                        </td>
+
+                        <td class="py-4 px-6 border-b border-gray-100">
+                            {{ $laporan->created_at->format('j F Y') }}
+                        </td>
+
+                        <td class="py-4 px-6 border-b border-gray-100">
+                            {{ $laporan->status }}
+                        </td>
+
+                        <td class="py-4 px-6 border-b border-gray-100">
+                            {{ $laporan->updated_at->format('j F Y') }}
+                        </td>
+
+                        <td class="py-4 px-6 text-center border-b border-gray-100">
+                            <a href="#" class="inline-block bg-[#FFD700] text-black font-bold px-6 py-2 rounded-full text-xs hover:bg-yellow-400 transition-transform transform hover:scale-105 shadow-md">
+                                Detail
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <div class="flex justify-center mt-10 gap-2">
+            <button class="w-8 h-8 flex items-center justify-center rounded bg-gray-300 text-white hover:bg-[#4FD1C5]"><i class="fas fa-chevron-left"></i></button>
+            <button class="w-8 h-8 flex items-center justify-center rounded bg-[#4FD1C5] text-white font-bold">1</button>
+            <button class="w-8 h-8 flex items-center justify-center rounded bg-[#0B1E33] text-white font-bold">2</button>
+            <button class="w-8 h-8 flex items-center justify-center rounded bg-[#FFD700] text-white font-bold"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
     </div>
 </div>
+
 @endsection
+
+@push('styles')
+<style>
+    /* Styling khusus agar tabel bisa border-spacing */
+    table { border-collapse: separate; }
+
+    /* Font custom jika diperlukan, default sans-serif sudah oke */
+    body { font-family: 'Inter', sans-serif; }
+</style>
+@endpush

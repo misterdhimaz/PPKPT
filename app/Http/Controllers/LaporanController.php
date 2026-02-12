@@ -2,65 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Laporan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class LaporanController extends Controller
 {
-    public function index()
-    {
-        // Menampilkan daftar laporan di halaman publik
-        $laporans = Laporan::latest()->get();
-
-        // Statistik sederhana untuk Dashboard
-        $stats = [
-            'masuk' => Laporan::count(),
-            'proses' => Laporan::whereIn('status', ['Verifikasi', 'Pemeriksaan'])->count(),
-            'selesai' => Laporan::where('status', 'Selesai')->count(),
-        ];
-
-        return view('home', compact('laporans', 'stats'));
-    }
-
+    // SAYA UBAH DARI 'index' MENJADI 'daftar' AGAR SESUAI ERROR KAMU
     public function daftar()
     {
-        // Ambil data laporan dengan pagination (10 per halaman)
-        $laporans = Laporan::latest()->paginate(10);
+        // 1. DATA DUMMY MANUAL (Langsung di sini biar pasti muncul)
+        // Kita buat pura-pura ada 15 data laporan
+        $dummyData = collect([]);
 
-        // Hitung statistik untuk Header Halaman Daftar
+        $statuses = ['Verifikasi', 'Pemeriksaan', 'Penindakan', 'Selesai'];
+        $categories = ['Kekerasan Seksual', 'Perundungan', 'Kekerasan Fisik', 'Diskriminasi', 'Intoleransi'];
+
+        for ($i = 1; $i <= 15; $i++) {
+            $dummyData->push((object)[
+                'id' => $i,
+                'ticket_id' => 'REG-' . rand(10000, 99999),
+                'jenis_kekerasan' => $categories[array_rand($categories)],
+                'status' => $statuses[array_rand($statuses)],
+                'created_at' => Carbon::now()->subDays(rand(1, 30)),
+                'updated_at' => Carbon::now()->subDays(rand(0, 5)),
+            ]);
+        }
+
+        // Kita buat pagination manual dari array dummy tadi
+        $page = request()->get('page', 1);
+        $perPage = 10;
+
+        $laporans = new LengthAwarePaginator(
+            $dummyData->forPage($page, $perPage),
+            $dummyData->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        // 2. HITUNG STATISTIK DUMMY
+        // Hitung manual dari data dummy di atas
         $stats = [
-            'masuk' => Laporan::count(),
-            'proses' => Laporan::whereIn('status', ['Verifikasi', 'Pemeriksaan', 'Pembahasan'])->count(),
-            'selesai' => Laporan::where('status', 'Selesai')->count(),
+            'masuk' => $dummyData->count(),
+            'proses' => $dummyData->whereIn('status', ['Verifikasi', 'Pemeriksaan', 'Penindakan'])->count(),
+            'selesai' => $dummyData->where('status', 'Selesai')->count(),
         ];
 
+        // 3. KIRIM KE VIEW
+        // Pastikan nama view-nya sesuai dengan folder kamu (resources/views/laporan/index.blade.php)
         return view('laporan.index', compact('laporans', 'stats'));
-    }
-
-    public function store(Request $request)
-    {
-        // Validasi
-        $request->validate([
-            'deskripsi' => 'required',
-            'kategori' => 'required',
-            'lokasi_makro' => 'required'
-        ]);
-
-        // Generate Ticket ID Format: S13/PPKPT/UNSRI/TAHUN/NO_URUT
-        $count = Laporan::count() + 1;
-        $year = date('Y');
-        $ticketId = "S13/PPKPT/UNSRI/{$year}/" . str_pad($count, 3, '0', STR_PAD_LEFT);
-
-        Laporan::create([
-            'ticket_id' => $ticketId,
-            'judul' => 'Laporan Masuk #' . $count,
-            'kategori' => $request->kategori,
-            'deskripsi' => $request->deskripsi,
-            'lokasi_makro' => $request->lokasi_makro,
-            'status' => 'Verifikasi',
-            'is_anonim' => true // Default anonim sesuai SRS
-        ]);
-
-        return redirect()->back()->with('success', 'Laporan Berhasil! Simpan Ticket ID Anda: ' . $ticketId);
     }
 }

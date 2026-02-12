@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SATGAS PPKPT UNSRI</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/satgas.png') }}">
 
     {{-- Script Tailwind (CDN) + Konfigurasi Lengkap --}}
     <script src="https://cdn.tailwindcss.com"></script>
@@ -50,10 +51,11 @@
     {{-- Alpine.js (WAJIB ADA UNTUK SLIDER & INTERAKSI) --}}
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="font-sans text-gray-800 antialiased bg-white overflow-x-hidden">
+
 
     {{-- NAVBAR --}}
-    <nav class="bg-white shadow-sm sticky top-0 z-50 border-t-0 border-unsri-blue">
+    <nav id="navbar" class="bg-white sticky top-0 z-50 transition-all duration-300">
+
         <div class="px-4 sm:px-6 lg:px-8">
 
             <div class="flex justify-between h-20 items-center">
@@ -98,7 +100,7 @@
         @yield('content')
     </main>
 
-    <footer class="bg-gradient-to-r from-[#0B1E33] to-[#556028] text-white pt-16 pb-8 border-b-8 border-unsri-blue mt-auto">
+    <footer class="bg-gradient-to-r from-[#0B1E33] to-[#556028] text-white pt-16 pb-8 border-b-8 border-unsri-blue mt-auto -mt-1">
         <div class="max-w-7xl mx-auto px-4">
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-12">
@@ -155,7 +157,7 @@
                     <ul class="space-y-3 text-sm font-medium">
                         <li>
                             <a href="#" class="flex items-center gap-2 hover:text-unsri-yellow transition-colors group">
-                                <i class="fas fa-chevron-right text-[10px] text-unsri-yellow group-hover:translate-x-1 transition-transform"></i> Permendikbudristek No. 30 Tahun 2021
+                                <i class="fas fa-chevron-right text-[10px] text-unsri-yellow group-hover:translate-x-1 transition-transform"></i> Permendikbudristek No. 55 Tahun 2024
                             </a>
                         </li>
                         <li>
@@ -199,6 +201,18 @@
             once: true,    // Animasi cuma main sekali pas scroll
             offset: 100,   // Mulai animasi sebelum elemen muncul full
         });
+
+
+            const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 10) {
+            navbar.classList.add("shadow-lg");
+        } else {
+            navbar.classList.remove("shadow-lg");
+        }
+    });
+
     </script>
 
     @stack('scripts')
