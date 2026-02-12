@@ -8,11 +8,10 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class LaporanController extends Controller
 {
-    // SAYA UBAH DARI 'index' MENJADI 'daftar' AGAR SESUAI ERROR KAMU
-    public function daftar()
+    // UBAH DARI 'daftar' KEMBALI JADI 'index'
+    public function index()
     {
-        // 1. DATA DUMMY MANUAL (Langsung di sini biar pasti muncul)
-        // Kita buat pura-pura ada 15 data laporan
+        // 1. DATA DUMMY MANUAL
         $dummyData = collect([]);
 
         $statuses = ['Verifikasi', 'Pemeriksaan', 'Penindakan', 'Selesai'];
@@ -29,7 +28,7 @@ class LaporanController extends Controller
             ]);
         }
 
-        // Kita buat pagination manual dari array dummy tadi
+        // Pagination
         $page = request()->get('page', 1);
         $perPage = 10;
 
@@ -41,16 +40,13 @@ class LaporanController extends Controller
             ['path' => request()->url(), 'query' => request()->query()]
         );
 
-        // 2. HITUNG STATISTIK DUMMY
-        // Hitung manual dari data dummy di atas
+        // Statistik
         $stats = [
             'masuk' => $dummyData->count(),
             'proses' => $dummyData->whereIn('status', ['Verifikasi', 'Pemeriksaan', 'Penindakan'])->count(),
             'selesai' => $dummyData->where('status', 'Selesai')->count(),
         ];
 
-        // 3. KIRIM KE VIEW
-        // Pastikan nama view-nya sesuai dengan folder kamu (resources/views/laporan/index.blade.php)
         return view('laporan.index', compact('laporans', 'stats'));
     }
 }
